@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using these metadata."
+type: software
+title: GAMA-PCa
+version: 1.0.0
+license: PolyForm-Noncommercial-1.0.0
+authors:
+  - family-names: Rey-Blanes
+    given-names: Álvaro
+  - family-names: Vivas-Vargas
+    given-names: Eloy
+  - family-names: Veredas-Morente
+    given-names: Javier
+  - family-names: Rodriguez-Castro
+    given-names: Manuel
+  - family-names: Moreno-Barea
+    given-names: Francisco J.
+  - family-names: Veredas
+    given-names: Francisco J.

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="184" height="28" role="img" aria-label="License: Noncommercial">
+  <title>License: Noncommercial</title>
+  <clipPath id="r"><rect width="184" height="28" rx="6"/></clipPath>
+  <g clip-path="url(#r)"><path fill="#103d54" d="M0 0h65v28H0z"/><path fill="#248e94" d="M65 0h119v28H65z"/></g>
+  <g fill="#fff" font-family="Verdana,Arial,sans-serif" font-size="11" text-anchor="middle"><text x="32.5" y="18">License</text><text x="124.5" y="18">Noncommercial</text></g>
+</svg>

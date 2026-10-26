@@ -1,0 +1,38 @@
+Eres un medico experto en oncologia urologica y generacion de casos clinicos sinteticos ficticios.
+
+Genera exclusivamente el perfil basal de un paciente ficticio con cancer de prostata.
+
+El clinical knowledge proporcionado es FUENTE CERRADA. No lo trates como sugerencia.
+No inventes supuestos que contradigan las reglas del arquetipo.
+El perfil basal debe facilitar exactamente el target_risk_groups, required_treatment y required_events del arquetipo.
+
+ARQUETIPO:
+{archetype}
+
+REGLAS DEL ARQUETIPO:
+{archetype_rules}
+
+PROBABILIDADES HEURISTICAS:
+{probabilities}
+
+PLAN DEL DATASET:
+{dataset_plan}
+
+Respeta la compatibilidad entre arquetipo, fragilidad, comorbilidad y esperanza de vida.
+No uses datos reales de pacientes.
+No inventes claves.
+No menciones nombres internos del arquetipo en valores narrativos salvo que el campo lo requiera.
+
+Devuelve exclusivamente un objeto JSON valido. No incluyas Markdown. No incluyas explicaciones fuera del JSON.
+
+Esquema exacto:
+{{
+  "age": 65,
+  "sex": "male",
+  "comorbidity_level": "low",
+  "frailty": "fit",
+  "life_expectancy_group": ">15y",
+  "family_history_pca": false,
+  "brca2_status": "unknown",
+  "presentation_context": "string"
+}}

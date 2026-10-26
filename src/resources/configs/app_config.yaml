@@ -1,0 +1,14 @@
+app:
+  project_name: GAMA-PCa
+  language: es
+  use_llm_generation: true
+  pipeline_mode: staged_agents
+logging:
+  log_llm_calls: true
+  log_request_messages: true
+optimizations:
+  kimi_cache_friendly_prefix: true
+  kimi_candidate_review: true
+  early_archetype_gate: true
+  kimi_concise_review: true
+  kimi_concise_num_predict: 6000

@@ -1,0 +1,71 @@
+Eres un medico experto en oncologia urologica y diagnostico de cancer de prostata.
+
+Genera un bloque diagnostico estructurado para un paciente ficticio. Debe ser compatible con el paciente, el arquetipo y las reglas clinicas proporcionadas.
+
+El clinical knowledge proporcionado es FUENTE CERRADA. No lo trates como sugerencia.
+El diagnostico debe clasificar exactamente dentro de uno de los target_risk_groups del arquetipo.
+No generes PSA, ISUP, Gleason, TNM ni metastasis que lleven a otro grupo de riesgo.
+
+PACIENTE:
+{patient}
+
+ARQUETIPO:
+{archetype}
+
+REGLAS DEL ARQUETIPO:
+{archetype_rules}
+
+GRUPOS DE RIESGO:
+{risk_groups}
+
+RUTAS DIAGNOSTICAS:
+{diagnostic_pathways}
+
+REGLAS DE BIOPSIA:
+{biopsy_rules}
+
+MAPEO GLEASON ISUP:
+{gleason_isup_mapping}
+
+No uses datos reales de pacientes.
+No inventes claves.
+El Gleason debe ser compatible exactamente con ISUP.
+La densidad de PSA debe aproximarse a initial_psa / prostate_volume_cc.
+El campo metastatic_sites debe ser coherente con cM: si cM es cM0 usa "none" o "pelvic_nodes" segun corresponda; si cM es cM1 no uses "none".
+El valor de mri.pirads y biopsy.strategy deben seguir literalmente mri_pathway, psa_density_biopsy_support y biopsy_strategies.
+Si eliges PI-RADS 3, justifica la biopsia con sospecha clinica no muy baja mediante PSA/densidad/antecedentes, manteniendo coherencia con el grupo de riesgo.
+Si eliges PI-RADS 4 o 5, no generes un bloque que parezca inframuestreado; la biopsia y las notas deben ser coherentes con una lesion positiva segun las reglas proporcionadas.
+local_stage_suspicion debe ser un estadio clinico permitido/coherente, por ejemplo cT1c, cT2a, cT2b, cT2c, cT3a, cT3b o cT4, no una frase libre.
+
+Devuelve exclusivamente un objeto JSON valido. No incluyas Markdown. No incluyas explicaciones fuera del JSON.
+
+Esquema exacto:
+{{
+  "initial_psa": 7.2,
+  "repeat_psa": 7.8,
+  "dre": "normal",
+  "prostate_volume_cc": 45.0,
+  "psa_density": 0.16,
+  "mri": {{
+    "performed": true,
+    "pirads": 4,
+    "lesion_location": "string",
+    "local_stage_suspicion": "string"
+  }},
+  "biopsy": {{
+    "performed": true,
+    "approach": "transperineal",
+    "strategy": "targeted_plus_perilesional",
+    "histology": "adenocarcinoma acinar de prostata",
+    "gleason": "3+4",
+    "isup": 2,
+    "positive_cores": 4,
+    "cribriform_or_intraductal": false
+  }},
+  "tnm": {{
+    "cT": "cT2a",
+    "cN": "cN0",
+    "cM": "cM0"
+  }},
+  "metastatic_sites": "none"
+}}

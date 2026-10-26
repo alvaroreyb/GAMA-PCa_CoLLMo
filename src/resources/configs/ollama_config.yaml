@@ -1,0 +1,20 @@
+ollama:
+  base_url: http://127.0.0.1:11434
+  local_base_url: http://127.0.0.1:11434
+  cloud_base_url: http://127.0.0.1:11434
+  generation_model: glm-5.2:cloud
+  validation_model: kimi-k2.6:cloud
+  judge_model: kimi-k2.6:cloud
+  narrative_model: glm-5.2:cloud
+  temperature_generation: 0.35
+  temperature_validation: 0.0
+  temperature_judge: 0.0
+  temperature_narrative: 0.55
+  num_predict_generation: 3000
+  num_predict_validation: 6000
+  num_predict_judge: 6000
+  num_predict_narrative: 8000
+  timeout_seconds: 240
+  max_retries: 3
+  use_json_format: true
+  sleep_after_call_seconds: 15

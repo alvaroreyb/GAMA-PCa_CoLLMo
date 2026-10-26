@@ -1,0 +1,38 @@
+Actua como un adjunto de Urologia/Oncologia escribiendo una evolucion hospitalaria real en espanol, con poco tiempo y muchas consultas pendientes.
+
+Vas a recibir un DOSSIER CLINICO FICTICIO ya validado. Tu tarea es redactar una unica nota clinica narrativa.
+
+REGLAS OBLIGATORIAS:
+- No digas que el caso es ficticio, sintetico, generado o de entrenamiento.
+- No menciones JSON, arquetipos, reglas, YAML, grafo, dataset ni modelos.
+- No copies nombres de campos internos.
+- Prohibido escribir expresiones artificiales o de variable como "paciente fit", "fit", "frailty", "surveillance", "low_risk", "risk_group", "active_follow_up", "follow_up" o similares. Traduce siempre a lenguaje clinico natural.
+- No escribas "Mes 0", "Mes 6" ni listas cronologicas mecanicas.
+- Usa fechas clinicas reales en formato natural o dd/mm/aaaa, derivadas del flujo clinico. Evita repetir dias y meses exactos; el dossier puede incluir variabilidad de mas/menos 20 dias respecto al mes clinico.
+- Redacta como una nota escrita rapido en historia clinica, NO como informe docente ni resumen de dataset.
+- Usa acronimos y acortamientos frecuentes en HCE espanola cuando encajen, con naturalidad: CaP, ADC, PSA, TR, RMmp, Bx/bx, AP, RT, PR, ADT, recidiva BQ, tto, s/ datos, asint, pte, cte, IQ, CCEE, uro-onc.
+- No desarrolles siempre los terminos completos. Mejor "ADC acinar prostata" que "adenocarcinoma acinar de prostata" cuando ya queda claro.
+- No uses "control" abreviado como "ctrl" de forma sistematica. Eso no cuenta como buen acronimo clinico.
+- Puede haber variantes propias de escritura rapida: algun acento omitido, mayusculas puntuales tipo PSA/RM/TR/ISUP, abreviaturas sin desarrollar, frases nominales, saltos de linea secos. No cometas errores que cambien significado clinico.
+- Mantente fiel al dossier: PSA, Gleason, ISUP, TNM, RM, biopsia, tratamientos, recaidas, metastasis y complicaciones no pueden cambiar.
+- Si el dossier contiene event_type="systemic_staging_before_treatment", narra la prueba de estadificación sistémica antes de comité o tratamiento, incluyendo modalidad y resultado. No dejes cM0/cN1 M0 como etiqueta sin explicar la imagen que lo justifica.
+- No inventes valores ausentes.
+
+- No mezcles ingles generativo en la nota: evita expresiones como "new lines", "baseline" si existe forma clínica en español, o literales internos del JSON.
+- Usa testosterona en ng/dL cuando la menciones.
+- Si mencionas docetaxel q3w y numero de ciclos, asegúrate de que las fechas permitan aproximadamente ciclos cada 3 semanas.
+- Para recidiva bioquímica post-radioterapia por Phoenix, calcula el nadir como el PSA mínimo previo documentado, no como el último PSA antes de la recidiva.
+- No uses frases vagas con datos no presentes: prohibido "PSA en descenso", "pendiente de nuevo control" o "sin enfermedad residual" si el dossier no lo dice con evento/valor.
+- Si usas densidad de PSA, deja claro que corresponde al PSA inicial cuando hay PSA repetido.
+- Tras PR/prostatectomia radical, "PSA indetectable" es adecuado si el dossier lo respalda. Tras RT/radioterapia, usa lenguaje de nadir, PSA bajo/estable o ausencia de criterios Phoenix de recidiva BQ; evita presentar la respuesta post-RT como equivalente a PSA indetectable post-PR.
+- No hagas una plantilla perfecta. Evita estructura de resumen limpio. Mezcla parrafos breves con lineas tipo evolucion/consulta, manteniendo cronologia.
+- Mayor extension: minimo 450 palabras reales si el caso es localizado estable; minimo 650 si hay recaida, metastasis o mCRPC. No lo cierres en 3 parrafos breves.
+- Incluye textura de HCE real: motivo de consulta, antecedentes relevantes/negativos, exploracion, pruebas, comite o decision compartida si procede, plan y seguimiento. Puede haber lineas tipo "Evol." o "Plan:" si encaja.
+- Incluye detalles negativos utiles si estan en el dossier: sin dolor oseo, sin sintomas constitucionales, clinica miccional estable, sin datos de progresion, tolerancia/adhesion al plan.
+- Ejemplo de tono, no copiar literalmente: "Evol. Uro-Onc. Refiere encontrarse bien, no dolor oseo, no hematuria. PSA revisado. RMmp sin cambios claros. Se comenta opcion y se mantiene VA."
+- Debe contener al menos estos bloques integrados en texto clinico: situacion basal, diagnostico inicial, imagen/biopsia/AP, decision terapeutica, evolucion por fechas, impresion actual y plan.
+- Forma deseada: lineas sueltas, parrafos irregulares, alguna frase sin verbo, algun "OK", "s/ cambios", "pendiente de", "se explica". No redactes como articulo ni informe de alta.
+- Devuelve solo la nota clinica. Nada mas.
+- No añadas ningún tipo de identificación como hospital, nombres de doctores, etc.
+DOSSIER CLINICO:
+{clinical_dossier}

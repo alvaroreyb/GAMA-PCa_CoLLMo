@@ -1,0 +1,29 @@
+total_cases: 500
+start_index: 1
+seed: 42
+max_attempts_per_case: 10
+max_narrative_attempts_per_case: 3
+stop_after_repeated_validation_errors: 3
+generate_narrative: true
+use_kimi_case_review: true
+use_judge: true
+reject_if_kimi_review_fails: true
+reject_if_judge_critical_error: true
+judge_minimum_mean_score: 4.5
+quotas_by_archetype:
+  low_risk_active_surveillance_stable: 32
+  low_risk_active_surveillance_progression_to_treatment: 32
+  favourable_intermediate_radical_prostatectomy_stable: 32
+  favourable_intermediate_focal_hifu_registry_retreated: 32
+  favourable_intermediate_radiotherapy_stable: 31
+  unfavourable_intermediate_rp_biochemical_recurrence: 31
+  unfavourable_intermediate_rt_biochemical_recurrence: 31
+  high_risk_rp_positive_margin_salvage_rt: 31
+  high_risk_rt_long_adt_response: 31
+  locally_advanced_multimodal_treatment: 31
+  cn1_m0_local_plus_systemic: 31
+  metastatic_de_novo_adt_arpi_response: 31
+  metastatic_de_novo_triplet_progression_to_mcrpc: 31
+  mcrpc_docetaxel_then_cabazitaxel: 31
+  mcrpc_hrr_parp_inhibitor: 31
+  mcrpc_bone_metastases_palliative: 31

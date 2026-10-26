@@ -1,0 +1,71 @@
+Eres un medico experto en oncologia urologica y evolucion longitudinal del cancer de prostata.
+
+Genera una trayectoria clinica longitudinal ordenada por meses para un paciente ficticio. Debe ser compatible con diagnostico, riesgo, tratamiento inicial, arquetipo y reglas clinicas.
+
+PACIENTE:
+{patient}
+
+DIAGNOSTICO:
+{diagnosis}
+
+RIESGO:
+{risk}
+
+TRATAMIENTO INICIAL:
+{treatment}
+
+ARQUETIPO:
+{archetype}
+
+REGLAS ESPECIFICAS DEL ARQUETIPO:
+{archetype_rules}
+
+REGLAS DE PROGRESION:
+{progression_rules}
+
+REGLAS DE SEGUIMIENTO:
+{follow_up_rules}
+
+No uses datos reales de pacientes.
+No inventes claves.
+- Para unfavourable_intermediate, high_risk_localised, locally_advanced y cn1_m0, genera un evento separado event_type="systemic_staging_before_treatment" despues de diagnosis y antes de comite/tratamiento. Es OBLIGATORIO rellenar los campos JSON systemic_staging_modality y systemic_staging_result, no basta escribirlos en imaging o notes. Valores validos: systemic_staging_modality="psma_pet_ct" o "abdominopelvic_ct_plus_bone_scan" o "abdominopelvic_mri_plus_bone_scan"; systemic_staging_result="cN0_cM0" para grupos M0 localizados/localmente avanzados y "cN1_cM0" para cn1_m0. Si required_events contiene multidisciplinary_committee_decision, ese evento debe ir despues de systemic_staging_before_treatment y antes del tratamiento inicial.
+- Si initial_treatment="radical_prostatectomy", no menciones linfadenectomia, PLND ni diseccion ganglionar pelvica en ningun evento. Solo puedes mencionarlo si initial_treatment="radical_prostatectomy_plus_plnd".
+- No inventes event_type fuera de clinical_knowledge. Usa "follow_up", no "follow_up_after_radiotherapy".
+- En recaida bioquimica post-RT por Phoenix, el nadir es el PSA minimo previo documentado. El PSA de recaida debe ser al menos nadir + 2 ng/mL y la nota debe citar ese nadir real.
+- Si el tratamiento inicial fue radical_prostatectomy, no añadas un evento separado androgen_deprivation_therapy salvo que el arquetipo lo requiera explicitamente. Si hay ADT asociada a rescate, incluyela como nota del evento salvage_radiotherapy solo si no contradice treatment.
+No pongas eventos fuera de orden temporal.
+No generes una historia maxima ni una cascada completa de enfermedad. Genera SOLO la trayectoria requerida por el arquetipo.
+El vocabulario autorizado es el contenido en clinical_knowledge: REGLAS ESPECIFICAS DEL ARQUETIPO, REGLAS DE PROGRESION y REGLAS DE SEGUIMIENTO.
+No existe una lista manual externa de eventos.
+Los eventos de "required_events" del arquetipo son una checklist obligatoria: cada valor debe aparecer literalmente en "trajectory[].event_type" o, si el propio clinical_knowledge lo representa como tratamiento, en "trajectory[].treatment" o en "treatment_components".
+No omitas ningun required_event. Si falta un required_event, la respuesta es invalida.
+- active_surveillance_reclassification y switch_to_curative_treatment NO implican riesgo intermedio desfavorable. Si declaras un nuevo grupo de riesgo, debe cumplir una rama completa de las reglas YAML de riesgo: all significa TODAS sus condiciones y any significa AL MENOS UNA rama completa. Conserva el ultimo TNM clinico documentado salvo cambio explicito; no hace falta repetirlo en la reclasificacion. Usa el PSA y el grado histologico vigentes en ese momento. No alteres datos para justificar una etiqueta de riesgo.
+Los eventos de "forbidden_events" del arquetipo estan estrictamente prohibidos.
+Si el arquetipo es estable, no incluyas reclasificacion, cambio de tratamiento, recaida, metastasis, mCRPC, complicaciones oseas ni cuidados paliativos.
+Si el tratamiento inicial es active_surveillance y el arquetipo no pide reclassification/switch_to_curative_treatment, todos los eventos posteriores deben ser controles de vigilancia activa estables.
+Tras prostatectomia radical, puedes describir PSA indetectable cuando corresponda. Tras radioterapia, incluso con ADT, describe la evolucion como PSA bajo/estable, descenso hacia nadir o ausencia de criterios Phoenix de recaida; evita formularla como equivalente a "PSA indetectable" post-prostatectomia.
+Usa en "event_type" y "treatment" identificadores estructurados compatibles con las listas, por ejemplo "androgen_deprivation_therapy" o "adt", no descripciones largas en lenguaje natural.
+No describas mCRPC sin ADT previa y progresion resistente a castracion.
+
+Devuelve exclusivamente un objeto JSON valido. No incluyas Markdown. No incluyas explicaciones fuera del JSON.
+
+Esquema exacto:
+{{
+  "trajectory": [
+    {{
+      "month": 0,
+      "event_type": "diagnosis",
+      "state": "diagnosed",
+      "psa": 7.2,
+      "testosterone": null,
+      "imaging": "string",
+      "treatment": null,
+      "complication": null,
+      "notes": "string"
+    }}
+  ],
+  "final_status": {{
+    "oncological_status": "string",
+    "follow_up_status": "string"
+  }}
+}}

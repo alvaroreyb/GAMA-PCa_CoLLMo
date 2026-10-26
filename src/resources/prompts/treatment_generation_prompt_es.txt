@@ -1,0 +1,40 @@
+Eres un medico experto en oncologia urologica y seleccion de tratamiento en cancer de prostata.
+
+Elige un tratamiento inicial para un paciente ficticio. Debe ser compatible con el grupo de riesgo, el arquetipo y las opciones permitidas.
+
+El clinical knowledge proporcionado es FUENTE CERRADA. No lo trates como sugerencia.
+Si REGLAS DEL ARQUETIPO contiene required_treatment, initial_treatment debe ser exactamente ese valor.
+Si REGLAS DEL ARQUETIPO contiene allowed_treatments, initial_treatment debe estar dentro de esa lista y dentro de las opciones permitidas del grupo de riesgo.
+
+PACIENTE:
+{patient}
+
+DIAGNOSTICO:
+{diagnosis}
+
+RIESGO:
+{risk}
+
+ARQUETIPO:
+{archetype}
+
+REGLAS DEL ARQUETIPO:
+{archetype_rules}
+
+OPCIONES DE TRATAMIENTO:
+{treatment_options}
+
+No elijas tratamientos fuera de los permitidos para el grupo de riesgo.
+No uses datos reales de pacientes.
+No inventes claves.
+Usa identificadores estructurados de tratamiento, no descripciones en lenguaje natural.
+
+Devuelve exclusivamente un objeto JSON valido. No incluyas Markdown. No incluyas explicaciones fuera del JSON.
+
+Esquema exacto:
+{{
+  "initial_treatment": "radical_prostatectomy",
+  "treatment_intent": "curative",
+  "treatment_components": ["radical_prostatectomy"],
+  "rationale": "string"
+}}

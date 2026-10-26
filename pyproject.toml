@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=80.9,<81"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gama-pca"
+version = "1.0.0"
+description = "Guideline-aware synthetic longitudinal prostate cancer notes in Spanish"
+requires-python = ">=3.11"
+readme = "README.md"
+license = "PolyForm-Noncommercial-1.0.0"
+license-files = ["LICENSE.md", "THIRD_PARTY_NOTICES.md"]
+dependencies = ["pydantic==2.12.4", "PyYAML==6.0.3", "requests==2.32.5"]
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.2"]
+ner = ["torch==2.10.0", "transformers==5.5.1", "pandas==2.3.3", "numpy==2.3.5"]
+
+[project.scripts]
+gama-pca = "src.main:main"
+gama-pca-review = "src.review_console:main"
+gama-pca-silver = "src.run_validated_silver:main"
+
+[tool.setuptools]
+packages = ["src", "src.silver"]
+
+[tool.setuptools.package-data]
+src = ["resources/configs/*.yaml", "resources/prompts/*.txt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["integration: requires external authorised clinical knowledge"]
