@@ -72,9 +72,9 @@ Configure the endpoint and model names in [the Ollama configuration](src/resourc
 
 ## How it works
 
-<a href="GAMAPC.png"><img src="GAMAPC.png" alt="GAMA-PCa specialized-agent architecture and information exchange: shared clinical knowledge, structured generation and validation, narrative generation, assessment, export and independent clinical review." width="100%"></a>
+<a href="GAMAPCa.png"><img src="GAMAPCa.png" alt="GAMA-PCa specialized-agent architecture and information exchange: shared clinical knowledge, structured generation and validation, narrative generation, assessment, export and independent clinical review." width="100%"></a>
 
-<p align="center"><a href="GAMAPC.png">View full-size architecture</a> &nbsp;·&nbsp; <a href="GAMAPC.pdf">Download PDF</a></p>
+<p align="center"><a href="GAMAPCa.png">View full-size architecture</a> &nbsp;·&nbsp; <a href="GAMAPCa.pdf">Download PDF</a></p>
 
 The structured case fixes the clinical trajectory before narrative generation. The **structured-case reviewer** checks evidence against authorised CK; the **narrative judge** receives only the resulting note.
 
